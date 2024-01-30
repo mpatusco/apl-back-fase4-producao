@@ -1,0 +1,22 @@
+# Create a configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apl-producao-config
+  labels:
+    app: apl-producao
+data:
+  DATASOURCE_INITIALIZATION_MODE: always
+  DATASOURCE_INITIALIZE: 'true'
+  DATASOURCE_CONTINUE_ON_ERROR: 'true'
+  HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+  HIBERNATE_SHOW_SQL: 'true'
+  HIBERNATE_DDL_AUTO: update
+  SERVER_PORT: '9092'
+  PEDIDO_URL: http://{Your_account}.us-east-1.elb.amazonaws.com:9091/tech-challenge/pedidos
+  SERVLET_CONTEXT_PATH: /tech-challenge
+  FEIGN_CONNECT_TIMEOUT: '14000'
+  FEIGN_READ_TIMEOUT: '14000'
+  SPRING_DB_URL: jdbc:postgresql://producao-database.{Your_account}.us-east-1.rds.amazonaws.com:5432/postgres?ssl=true&sslmode=require&rejectUnauthorized=false
+  SPRING_DB_USER: postgres
+  SPRING_DB_PASS: postgres

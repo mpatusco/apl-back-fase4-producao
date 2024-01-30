@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "default": {},
+  "title": "Root Schema",
+  "required": [
+    "numeroNaProducao",
+    "idPedido",
+    "idCliente"
+  ],
+  "properties": {
+    "numeroNaProducao": {
+      "type": "integer",
+      "default": 0,
+      "title": "The numeroNaProducao Schema",
+      "examples": [
+        2
+      ]
+    },
+    "idPedido": {
+      "type": "string",
+      "default": "",
+      "title": "The idPedido Schema",
+      "examples": [
+        "553bfb37-86fb-44b5-b5f3-b35a453a4577"
+      ]
+    },
+    "idCliente": {
+      "type": "string",
+      "default": "",
+      "title": "The idCliente Schema",
+      "examples": [
+        "553bfb37-86fb-44b5-b5f3-b35a453a4577"
+      ]
+    }
+  },
+  "examples": [{
+    "numeroNaProducao": 2,
+    "idPedido": "553bfb37-86fb-44b5-b5f3-b35a453a4577",
+    "idCliente": "553bfb37-86fb-44b5-b5f3-b35a453a4577"
+  }]
+}
