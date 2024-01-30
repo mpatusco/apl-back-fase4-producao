@@ -1,0 +1,58 @@
+name: Steps validate on PR
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+
+jobs:
+  quality_bdd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v2
+
+      - name: Checkout do Código para Mock
+        uses: actions/checkout@v2
+        with:
+          repository: mpatusco/fiap-mock
+          ref: main
+          path: caminho/para/aplicacao-de-mock
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          java-package: 'jdk'
+          architecture: 'x64'
+
+      - name: Iniciar aplicação de mock
+        run: |
+          export MOCK_APP_URL=http://localhost:4000
+          npm install
+          npm run start &
+        env:
+          MOCK_APP_URL: http://localhost:4000
+        working-directory: caminho/para/aplicacao-de-mock
+
+      - name: Aguardar Inicialização aplicação de mock
+        run: sleep 60s
+
+      - name: Construir com Maven
+        run: mvn clean install -DskipTests
+
+      - name: Executar testes
+        run: mvn spring-boot:run "-Dspring-boot.run.profiles=dev" &
+
+      - name: Aguardar Inicialização
+        run: sleep 30s
+
+      - name: Executar BDD
+        run: mvn test -Psystem-test
+
+      - name: Encerrar Aplicação
+        run: pkill -f "spring-boot:run"

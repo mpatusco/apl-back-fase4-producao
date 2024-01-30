@@ -1,0 +1,15 @@
+# Create a service
+kind: Service
+apiVersion: v1
+metadata:
+  name: apl-producao
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::{Your_account}:role/eks-eks-nodes"
+spec:
+  selector:
+    app: apl-producao
+  ports:
+    - name: apl-producao
+      targetPort: 9092
+      port: 9092
+  type: LoadBalancer

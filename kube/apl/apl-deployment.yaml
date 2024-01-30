@@ -1,0 +1,94 @@
+# Create a deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apl-producao
+spec:
+  selector:
+    matchLabels:
+      app: apl-producao
+  replicas: 1
+  template:
+    metadata:
+#      annotations:
+#        eks.amazonaws.com/role-arn: arn:aws:iam::{Your account}:role/my-app-service-account
+      labels:
+        app: apl-producao
+    spec:
+      containers:
+        - name: apl-producao
+          image: plobon/fiapproducao:v2
+          imagePullPolicy: "Always"
+          env:
+            - name: spring.jpa.properties.hibernate.dialect
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: HIBERNATE_DIALECT
+            - name: spring.jpa.hibernate.show-sql
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: HIBERNATE_SHOW_SQL
+            - name: spring.datasource.initialization-mode
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: DATASOURCE_INITIALIZATION_MODE
+            - name: spring.datasource.initialize
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: DATASOURCE_INITIALIZE
+            - name: spring.datasource.continue-on-error
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: DATASOURCE_CONTINUE_ON_ERROR
+            - name: spring.jpa.hibernate.ddl-auto
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: HIBERNATE_DDL_AUTO
+            - name: server.port
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: SERVER_PORT
+            - name: server.servlet.context-path
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: SERVLET_CONTEXT_PATH
+            - name: pedido.service.url
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: PEDIDO_URL
+            - name: feign.client.config.default.connectTimeout
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: FEIGN_CONNECT_TIMEOUT
+            - name: feign.client.config.default.readTimeout
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: FEIGN_READ_TIMEOUT
+            - name: spring.datasource.url
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: SPRING_DB_URL
+            - name: spring.datasource.username
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: SPRING_DB_USER
+            - name: spring.datasource.password
+              valueFrom:
+                configMapKeyRef:
+                  name: apl-producao-config
+                  key: SPRING_DB_PASS
+          ports:
+            - containerPort: 9092

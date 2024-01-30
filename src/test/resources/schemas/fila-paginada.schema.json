@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "title": "Root Schema",
+  "type": "array",
+  "default": [],
+  "items": {
+    "title": "A Schema",
+    "type": "object",
+    "required": [
+      "numeroNaProducao",
+      "idPedido",
+      "idCliente"
+    ],
+    "properties": {
+      "numeroNaProducao": {
+        "title": "The numeroNaProducao Schema",
+        "type": "integer",
+        "examples": [
+          1,
+          2,
+          4
+        ]
+      },
+      "idPedido": {
+        "title": "The idPedido Schema",
+        "type": "string",
+        "examples": [
+          "3354a65e-e110-422e-86f8-230e1575569a",
+          "6fded932-d38a-4f6a-bc34-169de16a0409",
+          "281087a3-7ea3-4314-aafd-9bb84616dc01"
+        ]
+      },
+      "idCliente": {
+        "title": "The idCliente Schema",
+        "type": "string",
+        "examples": [
+          "61f1f26b-1bea-403d-bc8d-9c2dac6c41a8",
+          "7d44b74c-53db-4c34-b28a-089485a5b196",
+          "3da57b49-29ff-4535-836b-948c6f3a9b52"
+        ]
+      }
+    },
+    "examples": [{
+      "numeroNaProducao": 1,
+      "idPedido": "3354a65e-e110-422e-86f8-230e1575569a",
+      "idCliente": "61f1f26b-1bea-403d-bc8d-9c2dac6c41a8"
+    },
+      {
+        "numeroNaProducao": 2,
+        "idPedido": "6fded932-d38a-4f6a-bc34-169de16a0409",
+        "idCliente": "7d44b74c-53db-4c34-b28a-089485a5b196"
+      },
+      {
+        "numeroNaProducao": 4,
+        "idPedido": "281087a3-7ea3-4314-aafd-9bb84616dc01",
+        "idCliente": "3da57b49-29ff-4535-836b-948c6f3a9b52"
+      }]
+  },
+  "examples": [
+    [{
+      "numeroNaProducao": 1,
+      "idPedido": "3354a65e-e110-422e-86f8-230e1575569a",
+      "idCliente": "61f1f26b-1bea-403d-bc8d-9c2dac6c41a8"
+    },
+      {
+        "numeroNaProducao": 2,
+        "idPedido": "6fded932-d38a-4f6a-bc34-169de16a0409",
+        "idCliente": "7d44b74c-53db-4c34-b28a-089485a5b196"
+      },
+      {
+        "numeroNaProducao": 4,
+        "idPedido": "281087a3-7ea3-4314-aafd-9bb84616dc01",
+        "idCliente": "3da57b49-29ff-4535-836b-948c6f3a9b52"
+      }]
+  ]
+}
